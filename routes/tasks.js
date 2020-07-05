@@ -15,6 +15,12 @@ router.get('/', async (ctx) => {
   ctx.body = await query;
 });
 
+router.get('/:id(\\d+)', async (ctx) => {
+  const { id } = ctx.params;
+
+  ctx.body = await TasksService.getTaskById(id);
+});
+
 router.post('/', async (ctx) => {
   const { title, description, status } = ctx.request.body;
   const { id: userId } = ctx.request.jwtPayload;
